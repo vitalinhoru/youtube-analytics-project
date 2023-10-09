@@ -20,43 +20,54 @@ class Channel:
 
     @property
     def channel_id(self):
+        """Возвращает id канала"""
         return self.__channel_id
 
     @property
     def title(self):
-        return self.print_info()['items'][0]['snippet']['title']
+        """Возвращает название канала"""
+        title = self.print_info()['items'][0]['snippet']['title']
+        return title
 
     @property
     def description(self):
-        return self.print_info()['items'][0]['snippet']['description']
+        """Возвращает описание канала"""
+        description = self.print_info()['items'][0]['snippet']['description']
+        return description
 
     @property
     def url(self):
+        """Возвращает ссылку на канал"""
         id_channel = self.print_info()['items'][0]['id']
         url = f'https://www.youtube.com/channel/{id_channel}'
         return url
 
     @property
     def subscriber_count(self):
+        """Возвращает количество подписчиков"""
         subscribers = self.print_info()['items'][0]['statistics']['subscriberCount']
         return subscribers
 
     @property
     def video_count(self):
+        """Возвращает количество видео"""
         video_count = self.print_info()['items'][0]['statistics']['videoCount']
         return video_count
 
     @property
     def view_count(self):
+        """Возвращает общее количество просмотров"""
         view_count = self.print_info()['items'][0]['statistics']['viewCount']
         return view_count
 
     @classmethod
     def get_service(cls):
+        """Возвращает объект для работы с YouTube API"""
         get_service = build('youtube', 'v3', developerKey=cls.__api_key)
         return get_service
 
     def to_json(self, path):
+        """Сохраняет в файл значения атрибутов экземпляра"""
         channel = self.print_info()
         channel_string = json.dumps(channel)
         with open(path, "w", encoding='UTF=8') as file:
