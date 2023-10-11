@@ -72,3 +72,51 @@ class Channel:
         channel_string = json.dumps(channel)
         with open(path, "w", encoding='UTF=8') as file:
             file.write(channel_string)
+
+    def __str__(self):
+        """
+        Отображает информацию об объекте класса
+        """
+        return f'{self.title} ({self.url}'
+
+    def __add__(self, other):
+        """
+        Прибавляет к экземпляру класса объект произвольного типа данных
+        """
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+    def __sub__(self, other):
+        """
+        Метод для операции вычитания
+        """
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __lt__(self, other):
+        """
+        Метод для операции сравнения «меньше»
+        """
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __le__(self, other):
+        """
+        Метод для операции сравнения «меньше или равно»
+        """
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __gt__(self, other):
+        """
+        Метод для операции сравнения «больше»
+        """
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __ge__(self, other):
+        """
+        Метод для операции сравнения «больше или равно»
+        """
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __eq__(self, other):
+        """
+        Метод для операции сравнения «равно»
+        """
+        return int(self.subscriber_count) == int(other.subscriber_count)
