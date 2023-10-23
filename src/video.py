@@ -28,9 +28,7 @@ class PLVideo(Video):
         """
         Получает id плейлиста и создает из него объект по id видео
         """
-        api_key = os.getenv('YT_API_KEY')
-        youtube = build('youtube', 'v3', developerKey=api_key)
-        playlist_videos = youtube.playlistItems().list(playlistId=playlist_id,
+        playlist_videos = Video.youtube.playlistItems().list(playlistId=playlist_id,
                                                        part='contentDetails',
                                                        maxResults=50,
                                                        ).execute()
