@@ -14,10 +14,16 @@ class Video:
         video_response = Video.youtube.videos().list(part='snippet,statistics,contentDetails,topicDetails',
                                                      id=video_id
                                                      ).execute()
-        self.title = video_response['items'][0]['snippet']['title']
-        self.url = f'https://www.youtube.com/watch?v={video_id}'
-        self.view_count = video_response['items'][0]['statistics']['viewCount']
-        self.like_count = video_response['items'][0]['statistics']['likeCount']
+        try:
+            self.title = video_response['items'][0]['snippet']['title']
+            self.url = f'https://www.youtube.com/watch?v={video_id}'
+            self.view_count = video_response['items'][0]['statistics']['viewCount']
+            self.like_count = video_response['items'][0]['statistics']['likeCount']
+        except:
+            self.title = None
+            self.like_count = None
+            self.url = None
+            self.view_count = None
 
     def __str__(self):
         return self.title
